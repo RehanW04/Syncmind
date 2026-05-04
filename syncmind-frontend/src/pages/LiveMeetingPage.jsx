@@ -6,6 +6,8 @@ import ActiveMeetingRoom from '../components/Meeting/ActiveMeetingRoom';
 import { WebRTCProvider } from '../context/WebRTCContext';
 import { Brain } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 export default function LiveMeetingPage() {
   const { roomId } = useParams();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ export default function LiveMeetingPage() {
   const userId = user?.id || Math.random().toString(36).substring(7);
 
   React.useEffect(() => {
-    fetch(`http://localhost:5000/api/meetings/${roomId}`)
+    fetch(`${API_URL}/meetings/${roomId}`)
       .then(res => res.json())
       .then(data => {
         if (!data.error) setMeetingData(data);

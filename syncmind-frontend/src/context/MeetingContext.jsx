@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const MeetingContext = createContext(null);
 
 export const MeetingProvider = ({ children }) => {

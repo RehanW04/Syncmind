@@ -3,6 +3,8 @@ import { Captions, Check, Copy, Maximize2, Mic, MicOff, Minimize2, Video, VideoO
 
 import { useWebRTCContext } from '../../context/WebRTCContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 export default function MeetingControls({
   activeTab, showSidebar, toggleChat, onLeave, toggleParticipants, toggleTranscript, isFullscreen, toggleFullscreen, isHost, roomId
 }) {
@@ -31,7 +33,7 @@ export default function MeetingControls({
     setIsEndingMeeting(true);
 
     try {
-      await fetch(`http://localhost:5000/api/meetings/${roomId}/summary`, { method: 'POST' });
+      await fetch(`${API_URL}/meetings/${roomId}/summary`, { method: 'POST' });
     } catch (error) {
       console.error('Failed to generate meeting summary before ending:', error);
     } finally {

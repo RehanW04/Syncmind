@@ -12,11 +12,13 @@ import { getAiServiceUrl } from './services/aiClient.js';
 const app = express();
 const httpServer = createServer(app);
 
+const allowedOrigin = process.env.FRONTEND_URL || '*';
+
 const io = new Server(httpServer, {
-  cors: { origin: '*', methods: ['GET', 'POST'] }
+  cors: { origin: allowedOrigin, methods: ['GET', 'POST'] }
 });
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: allowedOrigin }));
 app.use(express.json({ limit: '10mb' }));
 
 app.get('/api/health', (req, res) => {
