@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+deepgram-sdk
+openai
+chromadb
+numpy
+python-dotenv

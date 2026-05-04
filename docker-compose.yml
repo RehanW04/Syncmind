@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: syncmind-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: syncmind
+    ports:
+      - "5432:5432"
+    volumes:
+      - syncmind-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d syncmind"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  syncmind-postgres-data:
