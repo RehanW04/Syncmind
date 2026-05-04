@@ -33,6 +33,17 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/meetings', meetingRoutes);
 
+// Root route so visiting the backend URL directly doesn't look broken
+app.get('/', (req, res) => {
+  res.send('SyncMind Backend is running!');
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Express Error:', err);
+  res.status(500).json({ error: 'Internal Server Error', details: err.message });
+});
+
 setupSocketHandlers(io);
 
 const PORT = process.env.PORT || 5000;
