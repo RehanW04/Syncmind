@@ -12,7 +12,7 @@ import { getAiServiceUrl } from './services/aiClient.js';
 const app = express();
 const httpServer = createServer(app);
 
-const allowedOrigin = process.env.FRONTEND_URL || '*';
+const allowedOrigin = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.trim() : '*';
 
 const io = new Server(httpServer, {
   cors: { origin: allowedOrigin, methods: ['GET', 'POST'] }
